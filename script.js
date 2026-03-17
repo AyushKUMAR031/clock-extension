@@ -22,18 +22,19 @@ window.onload = function () {
 
     function setRandomAnimeImage() {
         const images = [
-            'images/anime1.jpg',
-            'images/anime2.jpg',
-            'images/anime3.png',
-            'images/anime4.png',
-            'images/anime5.jpg',
-            'images/anime6.jpg',
-            'images/anime7.png',
-            'images/anime8.png',
+            'images/allofusaredead.jpg',
+            'images/bellaCiao.jpg',
+            'images/lastOfUs.png',
+            'images/harryPotter.png',
+            'images/cyberpunk.jpg',
+            'images/worldWarZ.jpg',
+            'images/kakashi.png',
+            'images/itachi.png',
             'images/anime9.jpg',
-            'images/anime10.webp',
-            'images/anime11.jpg',
-            'images/anime12.webp'
+            'images/kaijuNo8.webp',
+            'images/yourName.jpg',
+            'images/squidGame.webp',
+            'images/professor.png',
         ];
         const randomIndex = Math.floor(Math.random() * images.length);
         const selectedImage = images[randomIndex]; // This is the image that will be used for the clock background
