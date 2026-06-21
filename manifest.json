@@ -1,10 +1,20 @@
 {
-    "manifest_version": 3,
-    "name": "Analog Clock New Tab",
-    "version": "1.0",
-    "description": "Displays an analog clock when a new tab is opened",
-    "chrome_url_overrides": {
-      "newtab": "newtab.html"
-    }
+  "manifest_version": 3,
+  "name": "Aesthetic Anime New Tab",
+  "version": "2.0",
+  "description": "Anime themed aesthetic productivity new tab with clock, weather and quick tools.",
+
+  "permissions": ["storage", "geolocation"],
+
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  },
+
+  "icons": {
+    "128": "images/itachi.png"
+  },
+
+  "background": {
+    "service_worker": "script.js"
+  }
 }
-  

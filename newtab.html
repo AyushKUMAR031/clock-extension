@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -9,7 +9,7 @@
   <body>
     <div class="clock">
       <!-- Numbers from 1 to 12 -->
-      <div class="number number-1">1</div>
+<!-- <div class="number number-1">1</div>
       <div class="number number-2">2</div>
       <div class="number number-3">3</div>
       <div class="number number-4">4</div>
@@ -26,6 +26,129 @@
       <div class="hand minute"></div>
       <div class="hand second"></div>
       <div class="center-circle"></div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html> -->
+-->
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Tab | Itachi</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- BACKGROUND LAYER -->
+    <div class="bg-overlay"></div>
+    <div class="particles"></div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+      <!-- HEADER -->
+      <header class="top-bar">
+        <div>
+          <h1 id="greeting">Good Evening</h1>
+          <p id="date">Sunday, June 21</p>
+        </div>
+
+        <div class="weather">
+          <span id="weather-icon">🌤</span>
+          <div>
+            <p id="location">Delhi</p>
+            <p id="temp">--°C</p>
+          </div>
+        </div>
+      </header>
+
+      <!-- CLOCK SECTION -->
+      <section class="clock-wrapper">
+        <div class="clock" id="clock">
+          <!-- Numbers -->
+          <div class="number" style="transform: rotate(30deg)">
+            <span>1</span>
+          </div>
+          <div class="number" style="transform: rotate(60deg)">
+            <span>2</span>
+          </div>
+          <div class="number" style="transform: rotate(90deg)">
+            <span>3</span>
+          </div>
+          <div class="number" style="transform: rotate(120deg)">
+            <span>4</span>
+          </div>
+          <div class="number" style="transform: rotate(150deg)">
+            <span>5</span>
+          </div>
+          <div class="number" style="transform: rotate(180deg)">
+            <span>6</span>
+          </div>
+          <div class="number" style="transform: rotate(210deg)">
+            <span>7</span>
+          </div>
+          <div class="number" style="transform: rotate(240deg)">
+            <span>8</span>
+          </div>
+          <div class="number" style="transform: rotate(270deg)">
+            <span>9</span>
+          </div>
+          <div class="number" style="transform: rotate(300deg)">
+            <span>10</span>
+          </div>
+          <div class="number" style="transform: rotate(330deg)">
+            <span>11</span>
+          </div>
+          <div class="number" style="transform: rotate(0deg)">
+            <span>12</span>
+          </div>
+
+          <!-- Hands -->
+          <div class="hand hour"></div>
+          <div class="hand minute"></div>
+          <div class="hand second"></div>
+
+          <div class="center-dot"></div>
+        </div>
+
+        <!-- DIGITAL TIME -->
+        <div class="digital-time" id="digital">00:00:00</div>
+
+        <!-- THEME -->
+        <div class="theme-label" id="theme">Theme: Itachi Uchiha</div>
+      </section>
+
+      <!-- SEARCH BAR -->
+      <section class="search-section">
+        <input
+          id="search"
+          type="text"
+          placeholder="Search Google or type a URL..."
+        />
+      </section>
+
+      <!-- QUICK DOCK -->
+      <section class="dock">
+        <a href="https://github.com" target="_blank">
+          <img src="https://cdn.simpleicons.org/github/ffffff" />
+        </a>
+
+        <a href="https://youtube.com" target="_blank">
+          <img src="https://cdn.simpleicons.org/youtube/FF0000" />
+        </a>
+
+        <a href="https://gmail.com" target="_blank">
+          <img src="https://cdn.simpleicons.org/gmail/EA4335" />
+        </a>
+
+        <a href="https://leetcode.com" target="_blank">
+          <img src="https://cdn.simpleicons.org/leetcode/FFA116" />
+        </a>
+      </section>
     </div>
 
     <script src="script.js"></script>
