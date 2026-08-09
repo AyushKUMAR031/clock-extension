@@ -1,0 +1,376 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #1a1a2e;
+  color: #eee;
+  min-width: 360px;
+  max-height: 500px;
+}
+
+.popup-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.popup-header {
+  background: linear-gradient(135deg, #16213e 0%, #0f3460 100%);
+  padding: 16px 20px;
+  border-bottom: 1px solid #e94560;
+}
+
+.popup-header h1 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #e94560;
+}
+
+.popup-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+.popup-footer {
+  padding: 12px 20px;
+  border-top: 1px solid #16213e;
+  background: #0f0f1a;
+}
+
+.popup-footer p {
+  font-size: 0.75rem;
+  color: #888;
+  text-align: center;
+}
+
+.settings-section {
+  margin-bottom: 24px;
+}
+
+.settings-section h2 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #e94560;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #16213e;
+}
+
+.input-group {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.input-group input[type="text"] {
+  flex: 1;
+  padding: 10px 12px;
+  border: 1px solid #16213e;
+  background: #0f0f1a;
+  color: #eee;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.input-group input[type="text"]:focus {
+  outline: none;
+  border-color: #e94560;
+  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.upload-form input[type="file"] {
+  padding: 8px;
+  border: 1px dashed #16213e;
+  border-radius: 6px;
+  background: #0f0f1a;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.upload-form input[type="file"]:hover {
+  border-color: #e94560;
+}
+
+.upload-form input[type="text"] {
+  padding: 10px 12px;
+  border: 1px solid #16213e;
+  background: #0f0f1a;
+  color: #eee;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.upload-form input[type="text"]:focus {
+  outline: none;
+  border-color: #e94560;
+  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.btn {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, #e94560 0%, #c73650 100%);
+  color: white;
+}
+
+.btn-primary:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.4);
+}
+
+.btn-secondary {
+  background: #16213e;
+  color: #eee;
+  border: 1px solid #e94560;
+}
+
+.btn-secondary:hover {
+  background: #0f3460;
+}
+
+.btn-danger {
+  background: #2a0a14;
+  color: #e94560;
+  border: 1px solid #e94560;
+}
+
+.btn-danger:hover {
+  background: #e94560;
+  color: white;
+}
+
+.btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.btn-group .btn {
+  flex: 1;
+  min-width: 120px;
+}
+
+.current-value {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.theme-count {
+  font-size: 0.7rem;
+  font-weight: 400;
+  color: #888;
+  margin-left: 8px;
+  text-transform: none;
+}
+
+.custom-themes-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.custom-theme-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #0f0f1a;
+  border: 1px solid #16213e;
+  border-radius: 8px;
+}
+
+.custom-theme-thumb {
+  width: 48px;
+  height: 32px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #16213e;
+}
+
+.custom-theme-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.custom-theme-title {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #eee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.custom-theme-meta {
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 2px;
+}
+
+.custom-theme-delete {
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid #e94560;
+  color: #e94560;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.custom-theme-delete:hover {
+  background: #e94560;
+  color: white;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-size: 0.85rem;
+}
+
+.empty-state small {
+  display: block;
+  margin-top: 8px;
+  font-size: 0.7rem;
+  color: #555;
+}
+
+/* SHORTCUT STYLES */
+.shortcut-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.shortcut-form input[type="text"] {
+  padding: 10px 12px;
+  border: 1px solid #16213e;
+  background: #0f0f1a;
+  color: #eee;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.shortcut-form input[type="text"]:focus {
+  outline: none;
+  border-color: #e94560;
+  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.shortcuts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.shortcut-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px;
+  background: #0f0f1a;
+  border: 1px solid #16213e;
+  border-radius: 8px;
+}
+
+.shortcut-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 6px;
+  object-fit: contain;
+  background: #1a1a2e;
+  border: 1px solid #16213e;
+}
+
+.shortcut-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.shortcut-name {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #eee;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shortcut-url {
+  font-size: 0.7rem;
+  color: #888;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shortcut-delete {
+  padding: 6px 10px;
+  background: transparent;
+  border: 1px solid #e94560;
+  color: #e94560;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.shortcut-delete:hover {
+  background: #e94560;
+  color: white;
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 12px 24px;
+  background: #16213e;
+  color: #4ade80;
+  border: 1px solid #4ade80;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  z-index: 1000;
+  box-shadow: 0 4px 20px rgba(74, 222, 128, 0.3);
+}
+
+.toast.show {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.toast.error {
+  background: #2a0a14;
+  color: #f87171;
+  border-color: #f87171;
+  box-shadow: 0 4px 20px rgba(248, 113, 113, 0.3);
+}

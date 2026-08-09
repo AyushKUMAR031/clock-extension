@@ -265,3 +265,109 @@ body {
   transform: scale(1.2);
   filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.6));
 }
+
+/* DYNAMIC DOCK STYLES */
+.dock {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.dock-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(10px);
+  transition: 0.3s;
+}
+
+.dock-item:hover {
+  transform: translateY(-6px) scale(1.15);
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+}
+
+.dock-item img {
+  width: 28px;
+  height: 28px;
+  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.3));
+  transition: 0.3s;
+}
+
+.dock-item:hover img {
+  transform: scale(1.2);
+  filter: drop-shadow(0 0 12px rgba(0, 255, 255, 0.6));
+}
+
+.dock-tooltip {
+  position: absolute;
+  bottom: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-size: 11px;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.8);
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.dock-item:hover .dock-tooltip {
+  opacity: 1;
+}
+
+.dock-delete {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-radius: 50%;
+  background: #e94560;
+  color: white;
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s, transform 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.dock-item:hover .dock-delete {
+  opacity: 1;
+}
+
+.dock-delete:hover {
+  transform: scale(1.2);
+  background: #c73650;
+}
+
+.add-shortcut-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: 2px dashed rgba(255, 255, 255, 0.3);
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 28px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.add-shortcut-btn:hover {
+  border-color: #e94560;
+  background: rgba(233, 69, 96, 0.15);
+  color: #e94560;
+  transform: scale(1.1);
+}

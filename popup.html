@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Clock Extension Settings</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="popup-container">
+    <header class="popup-header">
+      <h1>⚙ Settings</h1>
+    </header>
+
+    <main class="popup-content">
+      <!-- USER NAME SECTION -->
+      <section class="settings-section">
+        <h2>Your Name</h2>
+        <div class="input-group">
+          <input type="text" id="userNameInput" placeholder="Enter your name" />
+          <button class="btn btn-primary" id="saveNameBtn">Save</button>
+        </div>
+        <p class="current-value" id="currentName">Current: Itachi</p>
+      </section>
+
+      <!-- CUSTOM THEMES SECTION -->
+      <section class="settings-section">
+        <h2>Custom Themes</h2>
+        <div class="upload-form">
+          <input type="file" id="imageUpload" accept="image/*" />
+          <input type="text" id="themeTitleInput" placeholder="Theme title (e.g., My Vacation)" />
+          <button class="btn btn-primary" id="addThemeBtn">Add Theme</button>
+        </div>
+        <div class="custom-themes-list" id="customThemesList"></div>
+      </section>
+
+      <!-- SHORTCUTS SECTION -->
+      <section class="settings-section">
+        <h2>Quick Shortcuts</h2>
+        <div class="shortcut-form">
+          <input type="text" id="shortcutNameInput" placeholder="Name (e.g., GitHub)" />
+          <input type="text" id="shortcutUrlInput" placeholder="URL (e.g., https://github.com)" />
+          <button class="btn btn-primary" id="addShortcutBtn">Add Shortcut</button>
+        </div>
+        <div class="shortcuts-list" id="shortcutsList"></div>
+      </section>
+
+      <!-- DATA MANAGEMENT -->
+      <section class="settings-section">
+        <h2>Data Management</h2>
+        <div class="btn-group">
+          <button class="btn btn-secondary" id="exportDataBtn">Export Data</button>
+          <button class="btn btn-danger" id="clearThemesBtn">Clear Themes</button>
+          <button class="btn btn-danger" id="clearShortcutsBtn">Clear Shortcuts</button>
+          <button class="btn btn-danger" id="clearDataBtn">Clear All</button>
+        </div>
+      </section>
+    </main>
+
+    <footer class="popup-footer">
+      <p>Images stored locally in browser. Use Export to save to your repo.</p>
+    </footer>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Aesthetic Anime New Tab",
+  "name": "Aesthetic Tabs",
   "version": "2.0",
-  "description": "Anime themed aesthetic productivity new tab with clock, weather and quick tools.",
+  "description": "Aesthetic new tab with clock, weather and quick tools.",
 
   "permissions": ["storage", "geolocation"],
 
@@ -10,11 +10,14 @@
     "newtab": "newtab.html"
   },
 
-  "icons": {
-    "128": "images/itachi.png"
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Clock Extension Settings"
   },
 
-  "background": {
-    "service_worker": "script.js"
+  "icons": {
+    "16": "public/assets/icon.png",
+    "48": "public/assets/icon.png",
+    "128": "public/assets/icon.png"
   }
 }
