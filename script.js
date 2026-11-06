@@ -10,7 +10,7 @@ window.onload = () => {
   const greetingEl = document.getElementById("greeting");
   const dateEl = document.getElementById("date");
   const themeEl = document.getElementById("theme");
-  const search = document.getElementById("search");
+  const calendarEl = document.getElementById("calendar");
 
   const body = document.body;
 
@@ -29,8 +29,8 @@ window.onload = () => {
   // DEFAULT THEMES REMOVED - Only custom themes from storage
   // ===============================
   let customThemes = [];
-  let shortcuts = [];
   let userName = "";
+  let lastCalendarDay = new Date().toDateString();
 
   // ===============================
   // LOAD SETTINGS FROM STORAGE
@@ -39,13 +39,11 @@ window.onload = () => {
     try {
       const [syncData, localData] = await Promise.all([
         chrome.storage.sync.get({ userName: "" }),
-        chrome.storage.local.get({ customThemes: [], shortcuts: [] })
+        chrome.storage.local.get({ customThemes: [] })
       ]);
       userName = syncData.userName;
       customThemes = localData.customThemes || [];
-      shortcuts = localData.shortcuts || [];
       updateGreeting();
-      renderShortcuts();
     } catch (err) {
       console.log("Storage not available, using defaults:", err);
     }
@@ -94,10 +92,55 @@ window.onload = () => {
   }
 
   // ===============================
+  // CALENDAR
+  // ===============================
+  function renderCalendar() {
+    if (!calendarEl) return;
+
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = now.getMonth();
+    const today = now.getDate();
+
+    const monthNames = [
+      "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+      "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    ];
+    const weekdays = ["S", "M", "T", "W", "T", "F", "S"];
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    let cells = weekdays
+      .map(day => `<span class="cal-weekday">${day}</span>`)
+      .join("");
+
+    for (let i = 0; i < firstDay; i++) {
+      cells += '<span class="cal-day"></span>';
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const isToday = day === today ? " today" : "";
+      cells += `<span class="cal-day${isToday}">${day}</span>`;
+    }
+
+    calendarEl.innerHTML = `
+      <div class="cal-header">${monthNames[month]} ${year}</div>
+      <div class="cal-grid">${cells}</div>
+    `;
+  }
+
+  // ===============================
   // CLOCK ENGINE (SMOOTH)
   // ===============================
   function updateClock() {
     const now = new Date();
+
+    // Re-render calendar when the day changes (e.g. tab left open overnight)
+    if (now.toDateString() !== lastCalendarDay) {
+      lastCalendarDay = now.toDateString();
+      renderCalendar();
+    }
 
     const ms = now.getMilliseconds();
     const sec = now.getSeconds() + ms / 1000;
@@ -135,123 +178,6 @@ window.onload = () => {
     const namePart = userName ? `, ${userName} 👋` : ' 👋';
     greetingEl.innerText = `${greet}${namePart}`;
   }
-
-  // ===============================
-  // SHORTCUTS (QUICK DOCK)
-  // ===============================
-  function renderShortcuts() {
-    const dock = document.querySelector('.dock');
-    if (!dock) return;
-
-    if (shortcuts.length === 0) {
-      dock.innerHTML = `
-        <button class="add-shortcut-btn" id="addShortcutBtn" aria-label="Add shortcut" title="Add shortcut">+</button>
-      `;
-      document.getElementById('addShortcutBtn').addEventListener('click', openShortcutModal);
-      return;
-    }
-
-    dock.innerHTML = shortcuts.map((sc, index) => `
-      <a href="${escapeHtml(sc.url)}" target="_blank" class="dock-item" data-index="${index}">
-        <img src="${escapeHtml(sc.icon)}" alt="" />
-        <span class="dock-tooltip">${escapeHtml(sc.name)}</span>
-        <button class="dock-delete" data-index="${index}" aria-label="Delete shortcut">×</button>
-      </a>
-    `).join('') + `
-      <button class="add-shortcut-btn" id="addShortcutBtn" aria-label="Add shortcut" title="Add shortcut">+</button>
-    `;
-
-    // Add delete handlers
-    dock.querySelectorAll('.dock-delete').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        const index = parseInt(e.target.dataset.index);
-        deleteShortcut(index);
-      });
-    });
-
-    document.getElementById('addShortcutBtn').addEventListener('click', openShortcutModal);
-  }
-
-  // Extract domain from URL for favicon
-  function getDomainFromUrl(url) {
-    try {
-      const urlObj = new URL(url);
-      return urlObj.hostname.replace('www.', '');
-    } catch {
-      return null;
-    }
-  }
-
-  // Get favicon URL using Google's favicon service
-  function getFaviconUrl(url) {
-    const domain = getDomainFromUrl(url);
-    if (!domain) return '';
-    return `https://www.google.com/s2/favicons?domain=${domain}&sz=32`;
-  }
-
-  // Normalize URL - add https:// if no protocol
-  function normalizeUrl(url) {
-    url = url.trim();
-    if (!/^https?:\/\//i.test(url)) {
-      url = 'https://' + url;
-    }
-    return url;
-  }
-
-  function openShortcutModal() {
-    const name = prompt('Shortcut name (e.g., GitHub):');
-    if (!name) return;
-    let url = prompt('URL (e.g., github.com or https://github.com):');
-    if (!url) return;
-
-    // Normalize URL (add https:// if missing)
-    url = normalizeUrl(url);
-
-    // Validate URL
-    try {
-      new URL(url);
-    } catch {
-      alert('Please enter a valid URL');
-      return;
-    }
-
-    const icon = getFaviconUrl(url);
-
-    const shortcut = { name, url, icon };
-    chrome.storage.local.get({ shortcuts: [] }, (data) => {
-      const updated = [...data.shortcuts, shortcut];
-      chrome.storage.local.set({ shortcuts: updated });
-    });
-  }
-
-  function deleteShortcut(index) {
-    if (!confirm('Delete this shortcut?')) return;
-    const updated = shortcuts.filter((_, i) => i !== index);
-    chrome.storage.local.set({ shortcuts: updated });
-  }
-
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
-
-  // ===============================
-  // SEARCH BAR
-  // ===============================
-  search.addEventListener("keydown", (e) => {
-    if (e.key === "Enter") {
-      const query = search.value.trim();
-
-      if (query.startsWith("http")) {
-        window.location.href = query;
-      } else {
-        window.location.href = `https://www.google.com/search?q=${query}`;
-      }
-    }
-  });
 
   // ===============================
   // WEATHER (GEOLOCATION + API)
@@ -306,10 +232,6 @@ window.onload = () => {
       customThemes = changes.customThemes.newValue || [];
       setTheme(); // Immediately apply new theme
     }
-    if (area === 'local' && changes.shortcuts) {
-      shortcuts = changes.shortcuts.newValue || [];
-      renderShortcuts();
-    }
     if (area === 'sync' && changes.userName) {
       userName = changes.userName.newValue;
       updateGreeting();
@@ -322,6 +244,7 @@ window.onload = () => {
   async function init() {
     await loadSettings();
     setTheme();
+    renderCalendar();
     updateClock();
     loadWeather();
   }
